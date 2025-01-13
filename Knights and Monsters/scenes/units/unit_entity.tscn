@@ -1,0 +1,183 @@
+[gd_scene load_steps=9 format=3 uid="uid://ur6x7fnkh0cj"]
+
+[ext_resource type="Script" path="res://script/units/unit_entity.gd" id="1_s0qnc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jr81a"]
+radius = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqfsx"]
+bg_color = Color(0.635294, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny5dp"]
+bg_color = Color(0.231721, 0.716715, 9.62615e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc6k0"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77f7n"]
+bg_color = Color(0.0352941, 0, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_loigc"]
+radius = 128.25
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ie7s"]
+radius = 256.125
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+collision_mask = 0
+input_pickable = true
+motion_mode = 1
+script = ExtResource("1_s0qnc")
+default_hp = 500
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jr81a")
+
+[node name="HpBar" type="ProgressBar" parent="."]
+z_index = 2
+offset_left = -27.0
+offset_top = -35.0
+offset_right = 27.0
+offset_bottom = -34.0
+scale = Vector2(1, 0.974341)
+theme_override_colors/font_color = Color(1.92523e-06, 0.934839, 0.424783, 1)
+theme_override_colors/font_outline_color = Color(0.895315, 0.497039, 0.407601, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_tqfsx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ny5dp")
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="."]
+visible = false
+z_index = 2
+offset_left = -27.0
+offset_top = -34.0
+offset_right = 27.0
+offset_bottom = -33.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fc6k0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_77f7n")
+show_percentage = false
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 20.0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.455681, 0.233807, 0.971943, 1)
+
+[node name="PathCalculateTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="Attacktimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="guard_area" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="guard_area"]
+shape = SubResource("CircleShape2D_loigc")
+
+[node name="attack_area" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+debug_color = Color(0.960784, 0.0901961, 0.027451, 1)
+
+[node name="SelectArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectArea"]
+
+[node name="ExpArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExpArea"]
+shape = SubResource("CircleShape2D_1ie7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Rays2" type="Node2D" parent="."]
+
+[node name="BottomFront" type="RayCast2D" parent="Rays2"]
+position = Vector2(0, 5)
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[node name="TopFront" type="RayCast2D" parent="Rays2"]
+position = Vector2(0, -5)
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[node name="Bottom" type="Node2D" parent="Rays2"]
+
+[node name="Bottom60" type="RayCast2D" parent="Rays2/Bottom"]
+rotation = -0.523599
+target_position = Vector2(0, 30)
+
+[node name="Bottom90" type="RayCast2D" parent="Rays2/Bottom"]
+target_position = Vector2(0, 30)
+
+[node name="Top" type="Node2D" parent="Rays2"]
+
+[node name="Top60" type="RayCast2D" parent="Rays2/Top"]
+rotation = -2.61799
+target_position = Vector2(0, 30)
+
+[node name="Top90" type="RayCast2D" parent="Rays2/Top"]
+rotation = -3.14159
+target_position = Vector2(0, 30)
+
+[node name="Rays" type="Node2D" parent="."]
+visible = false
+
+[node name="Front" type="RayCast2D" parent="Rays"]
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[node name="Top30" type="RayCast2D" parent="Rays"]
+rotation = -2.0944
+target_position = Vector2(0, 30)
+
+[node name="Bottom30" type="RayCast2D" parent="Rays"]
+rotation = -1.0472
+target_position = Vector2(0, 30)
+
+[node name="Top60" type="RayCast2D" parent="Rays"]
+rotation = -2.61799
+target_position = Vector2(0, 30)
+
+[node name="Bottom60" type="RayCast2D" parent="Rays"]
+rotation = -0.523599
+target_position = Vector2(0, 30)
+
+[node name="Top90" type="RayCast2D" parent="Rays"]
+rotation = -3.14159
+target_position = Vector2(0, 30)
+
+[node name="Bottom90" type="RayCast2D" parent="Rays"]
+target_position = Vector2(0, 30)
+
+[node name="Front2" type="RayCast2D" parent="Rays"]
+position = Vector2(0, 10)
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[node name="Front3" type="RayCast2D" parent="Rays"]
+position = Vector2(0, -10)
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="PathCalculateTimer" to="." method="_on_path_calculate_timer_timeout"]
+[connection signal="body_exited" from="guard_area" to="." method="_on_guard_area_body_exited"]

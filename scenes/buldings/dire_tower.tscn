@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://bw4wifpkhdf22"]
+
+[ext_resource type="PackedScene" uid="uid://ur6x7fnkh0cj" path="res://scenes/units/unit_entity.tscn" id="1_io3ho"]
+[ext_resource type="Texture2D" uid="uid://bn1k6ril31pmi" path="res://asset/dire.png" id="2_ouujp"]
+[ext_resource type="PackedScene" uid="uid://fo56o4h3oa0w" path="res://scenes/effects/tower_projectile.tscn" id="2_q0fle"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tapm7"]
+radius = 192.167
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5hbxt"]
+radius = 192.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p5uqr"]
+radius = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46nt8"]
+atlas = ExtResource("2_ouujp")
+region = Rect2(476, 602, 67, 75)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d2fjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46nt8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="DireTower" instance=ExtResource("1_io3ho")]
+fraction = "dire"
+isbilding = true
+range_attack_projectile = ExtResource("2_q0fle")
+SPEED = 0
+default_damage = 150
+default_hp = 1500
+
+[node name="CollisionShape2D" parent="guard_area" index="0"]
+shape = SubResource("CircleShape2D_tapm7")
+
+[node name="CollisionShape2D" parent="attack_area" index="0"]
+shape = SubResource("CircleShape2D_5hbxt")
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+shape = SubResource("CircleShape2D_p5uqr")
+
+[node name="AnimatedSprite2D" parent="." index="11"]
+sprite_frames = SubResource("SpriteFrames_d2fjh")
+animation = &"idle"

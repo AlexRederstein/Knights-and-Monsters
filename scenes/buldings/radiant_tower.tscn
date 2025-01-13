@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjq1ikc528ba"]
+
+[ext_resource type="PackedScene" uid="uid://ur6x7fnkh0cj" path="res://scenes/units/unit_entity.tscn" id="1_np02l"]
+[ext_resource type="Texture2D" uid="uid://bqw3ri3fupnpi" path="res://asset/radiant.png" id="2_l0nv6"]
+[ext_resource type="PackedScene" uid="uid://fo56o4h3oa0w" path="res://scenes/effects/tower_projectile.tscn" id="2_tmkyt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n1xlt"]
+radius = 192.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yuqjy"]
+radius = 192.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nk13y"]
+radius = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erl0o"]
+atlas = ExtResource("2_l0nv6")
+region = Rect2(402, 132, 60, 66)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ehghi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erl0o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" instance=ExtResource("1_np02l")]
+isbilding = true
+range_attack_projectile = ExtResource("2_tmkyt")
+SPEED = 0
+default_damage = 150
+default_hp = 1500
+
+[node name="CollisionShape2D" parent="guard_area" index="0"]
+shape = SubResource("CircleShape2D_n1xlt")
+
+[node name="CollisionShape2D" parent="attack_area" index="0"]
+shape = SubResource("CircleShape2D_yuqjy")
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_nk13y")
+
+[node name="AnimatedSprite2D" parent="." index="11"]
+sprite_frames = SubResource("SpriteFrames_ehghi")
+animation = &"idle"

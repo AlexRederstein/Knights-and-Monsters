@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://swvxhoksir0s"]
+
+[ext_resource type="PackedScene" uid="uid://ur6x7fnkh0cj" path="res://scenes/units/unit_entity.tscn" id="1_m2g1d"]
+[ext_resource type="Texture2D" uid="uid://bn1k6ril31pmi" path="res://asset/dire.png" id="2_lxher"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wm81u"]
+radius = 49.6614
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1biux"]
+atlas = ExtResource("2_lxher")
+region = Rect2(107, 241, 105, 97)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5jtmj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1biux")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="DireBrarrack" instance=ExtResource("1_m2g1d")]
+fraction = "dire"
+isbilding = true
+SPEED = 0.0
+default_hp = 2000
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+position = Vector2(0.5, 3)
+shape = SubResource("CircleShape2D_wm81u")
+
+[node name="AnimatedSprite2D" parent="." index="11"]
+sprite_frames = SubResource("SpriteFrames_5jtmj")
+animation = &"idle"

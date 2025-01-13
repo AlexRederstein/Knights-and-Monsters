@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://q0qur38qyhot"]
+
+[ext_resource type="PackedScene" uid="uid://swvxhoksir0s" path="res://scenes/buldings/dire_melee_barrack.tscn" id="1_2wjv7"]
+[ext_resource type="PackedScene" uid="uid://bw4wifpkhdf22" path="res://scenes/buldings/dire_tower.tscn" id="2_as8m3"]
+
+[node name="DireBottomLaneBarracks" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_2wjv7")]
+position = Vector2(64, 0)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("1_2wjv7")]
+position = Vector2(-64, 0)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("2_as8m3")]
+position = Vector2(0, 128)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6yg0jrvpmqqq"]
+
+[ext_resource type="PackedScene" uid="uid://cgdmq1g2uk1tv" path="res://scenes/buldings/dire_hq.tscn" id="1_itfd4"]
+[ext_resource type="PackedScene" uid="uid://bw4wifpkhdf22" path="res://scenes/buldings/dire_tower.tscn" id="2_68eo3"]
+
+[node name="DireBase" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_itfd4")]
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("2_68eo3")]
+position = Vector2(-88, 16)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("2_68eo3")]
+position = Vector2(-24, 80)

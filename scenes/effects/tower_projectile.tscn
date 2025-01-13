@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://fo56o4h3oa0w"]
+
+[ext_resource type="PackedScene" uid="uid://d3i6ns42xslkx" path="res://scenes/effects/projectile.tscn" id="1_pugtu"]
+[ext_resource type="Texture2D" uid="uid://b41ocootqttea" path="res://asset/tower_projectile.png" id="2_mexr0"]
+
+[node name="Projecttile" instance=ExtResource("1_pugtu")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(-2.86102e-06, -4.76837e-07)
+rotation = 1.5708
+scale = Vector2(0.50583, 0.50583)
+texture = ExtResource("2_mexr0")

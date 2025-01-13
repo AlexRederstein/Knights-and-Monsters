@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dslohbwqhaxg0"]
+
+[ext_resource type="PackedScene" uid="uid://ur6x7fnkh0cj" path="res://scenes/units/unit_entity.tscn" id="1_t5nqa"]
+[ext_resource type="Texture2D" uid="uid://bqw3ri3fupnpi" path="res://asset/radiant.png" id="2_keajc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o772s"]
+radius = 63.1269
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk46y"]
+atlas = ExtResource("2_keajc")
+region = Rect2(130, 0, 138, 133)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pr4uw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk46y")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" instance=ExtResource("1_t5nqa")]
+isbilding = true
+SPEED = 0.0
+default_hp = 5000
+
+[node name="CollisionShape2D" parent="SelectArea" index="0"]
+shape = SubResource("CircleShape2D_o772s")
+
+[node name="AnimatedSprite2D" parent="." index="11"]
+sprite_frames = SubResource("SpriteFrames_pr4uw")
+animation = &"idle"

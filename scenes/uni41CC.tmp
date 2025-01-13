@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://o70hse036plc"]
+
+[ext_resource type="Script" path="res://characters/unit_entity.gd" id="1_esdnr"]
+[ext_resource type="Script" path="res://characters/area_2d.gd" id="2_07x33"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sk0xx"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2ay6"]
+radius = 211.038
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 1
+collision_mask = 5
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_esdnr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 5
+shape = SubResource("CircleShape2D_sk0xx")
+
+[node name="guard_area" type="Area2D" parent="."]
+script = ExtResource("2_07x33")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="guard_area"]
+shape = SubResource("CircleShape2D_b2ay6")
+
+[node name="attack_range" type="Area2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 5
+radius = 14.0
+time_horizon_obstacles = 1.0
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.455681, 0.233807, 0.971943, 1)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Rays" type="Node2D" parent="."]
+
+[node name="Top90" type="RayCast2D" parent="Rays"]
+rotation = -3.14159
+target_position = Vector2(0, 30)
+
+[node name="Top60" type="RayCast2D" parent="Rays"]
+rotation = -2.61799
+target_position = Vector2(0, 30)
+
+[node name="Top30" type="RayCast2D" parent="Rays"]
+rotation = -2.0944
+target_position = Vector2(0, 30)
+
+[node name="Bottom90" type="RayCast2D" parent="Rays"]
+target_position = Vector2(0, 30)
+
+[node name="Bottom60" type="RayCast2D" parent="Rays"]
+rotation = -0.523599
+target_position = Vector2(0, 30)
+
+[node name="Bottom30" type="RayCast2D" parent="Rays"]
+rotation = -1.0472
+target_position = Vector2(0, 30)
+
+[node name="Front" type="RayCast2D" parent="Rays"]
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[connection signal="body_entered" from="guard_area" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="guard_area" to="." method="_on_guard_area_body_entered"]
+[connection signal="body_exited" from="guard_area" to="." method="_on_guard_area_body_exited"]
+[connection signal="body_entered" from="attack_range" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="attack_range" to="." method="_on_attack_range_body_exited"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
