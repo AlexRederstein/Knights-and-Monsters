@@ -24,17 +24,13 @@ bg_color = Color(0.027451, 0.105882, 0.94902, 1)
 script = ExtResource("1_gvuj7")
 
 [node name="Panel" type="VBoxContainer" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = -1
+anchor_left = 0.246528
+anchor_top = 0.785494
+anchor_right = 0.753472
 anchor_bottom = 1.0
-offset_left = -292.0
-offset_top = -139.0
-offset_right = 292.0
 grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 10
+size_flags_horizontal = 3
 size_flags_vertical = 8
 
 [node name="HSplitContainer" type="GridContainer" parent="Panel"]

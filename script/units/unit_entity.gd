@@ -120,11 +120,12 @@ func _physics_process(delta: float) -> void:
 		states.idle:
 			if !ishero:
 				search_enemy()
-				anim.play('idle')
+			anim.play('idle')
 		states.moving:
 			if command_mode == CommandMode.ATTACK_MOVE:
-				#enemy_target = null
 				search_enemy()
+			if nav.is_target_reached():
+				set_state(states.idle)
 			move_to(movement_target, delta)
 		states.agro:
 			if get_enemy_target():
@@ -166,7 +167,9 @@ func move_to(point:Vector2, delta):
 	if path_timer.is_stopped():
 		update_path(point)
 	if nav.is_navigation_finished():
+		#print('target_reached')
 		if state == states.avoid:
+			#print(prev_state)
 			#set_state(states.moving)
 			#print(prev_state, state)
 			#avoidance_pos = Vector2.ZERO
@@ -190,14 +193,18 @@ func move_to(point:Vector2, delta):
 			#move_to(avoidance_pos, delta)
 			
 			#return
-			#nav.target_position = avoidance_pos
-			#var marker = preload('res://scenes/effects/movement_marker.tscn')
-			#var m = marker.instantiate()
-			#m.global_position = avoidance_pos
-			#get_parent().add_child(m)
+			nav.target_position = avoidance_pos
+			var marker = preload('res://scenes/effects/movement_marker.tscn')
+			var m = marker.instantiate()
+			m.global_position = avoidance_pos
+			get_parent().add_child(m)
 			
 		var safe_velocity = SPEED * direction * delta
-		nav.set_velocity(safe_velocity)
+		if nav.avoidance_enabled:
+			nav.set_velocity(safe_velocity)
+		else:
+			velocity = safe_velocity
+			move_and_slide()
 		anim.play('walk_'+get_animation_direction(direction))
 		move_and_slide()
 
@@ -229,6 +236,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 func get_clear_direction(node:Node2D):
 	for ray in node.get_children():
 		if(!ray.is_colliding()):
+			print(ray.name)
 			return ray
 	return null
 

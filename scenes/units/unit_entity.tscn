@@ -26,7 +26,6 @@ radius = 256.125
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
-collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_s0qnc")
@@ -110,12 +109,12 @@ shape = SubResource("CircleShape2D_1ie7s")
 [node name="Rays2" type="Node2D" parent="."]
 
 [node name="BottomFront" type="RayCast2D" parent="Rays2"]
-position = Vector2(0, 5)
+position = Vector2(0, 16)
 rotation = -1.5708
 target_position = Vector2(0, 30)
 
 [node name="TopFront" type="RayCast2D" parent="Rays2"]
-position = Vector2(0, -5)
+position = Vector2(0, -16)
 rotation = -1.5708
 target_position = Vector2(0, 30)
 
