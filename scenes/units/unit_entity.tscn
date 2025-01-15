@@ -26,6 +26,7 @@ radius = 256.125
 [node name="CharacterBody2D" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+collision_mask = 0
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_s0qnc")
@@ -65,6 +66,9 @@ radius = 20.0
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.455681, 0.233807, 0.971943, 1)
+
+[node name="CollideTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="PathCalculateTimer" type="Timer" parent="."]
 wait_time = 0.25
@@ -109,12 +113,16 @@ shape = SubResource("CircleShape2D_1ie7s")
 [node name="Rays2" type="Node2D" parent="."]
 
 [node name="BottomFront" type="RayCast2D" parent="Rays2"]
-position = Vector2(0, 16)
+position = Vector2(0, 25)
 rotation = -1.5708
 target_position = Vector2(0, 30)
 
 [node name="TopFront" type="RayCast2D" parent="Rays2"]
-position = Vector2(0, -16)
+position = Vector2(0, -25)
+rotation = -1.5708
+target_position = Vector2(0, 30)
+
+[node name="Front" type="RayCast2D" parent="Rays2"]
 rotation = -1.5708
 target_position = Vector2(0, 30)
 

@@ -38,6 +38,7 @@ class_name UNIT
 @onready var path_timer :Timer = $PathCalculateTimer
 @onready var anim :AnimatedSprite2D = $AnimatedSprite2D
 @onready var rays :Node2D = $Rays2
+@onready var ray_front = $Rays2/Front
 @onready var ray_top = $Rays2/TopFront
 @onready var ray_bottom = $Rays2/BottomFront
 
@@ -124,8 +125,8 @@ func _physics_process(delta: float) -> void:
 		states.moving:
 			if command_mode == CommandMode.ATTACK_MOVE:
 				search_enemy()
-			if nav.is_target_reached():
-				set_state(states.idle)
+			#if nav.is_target_reached():
+				#set_state(states.idle)
 			move_to(movement_target, delta)
 		states.agro:
 			if get_enemy_target():
@@ -152,10 +153,6 @@ func boot_hp_bar():
 	$HpBar.max_value = max_hp
 	$HpBar.value = hp
 
-#func play_animation(animation):
-	#if isbilding:
-		#return
-	#anim.play(animation)
 
 
 #======================================================================
@@ -167,55 +164,45 @@ func move_to(point:Vector2, delta):
 	if path_timer.is_stopped():
 		update_path(point)
 	if nav.is_navigation_finished():
-		#print('target_reached')
 		if state == states.avoid:
-			#print(prev_state)
-			#set_state(states.moving)
-			#print(prev_state, state)
-			#avoidance_pos = Vector2.ZERO
 			set_state(prev_state)
 		return
-		#stop()
 	else:
 		var direction = get_global_position().direction_to(nav.get_next_path_position())
 		rays.rotation = direction.angle()
 		
 #		Тесты обхода препятствий
-		#if ray_front.is_colliding() or ray_front1.is_colliding() or ray_front2.is_colliding():
-			#var ray = get_clear_direction()
-			#if ray:
-				#direction = Vector2.RIGHT.rotated(rays.rotation + ray.rotation)
-#======================================================================
-		var ray = check_collide()
+		#if state != states.avoid:
+		var ray
+		if $CollideTimer.is_stopped():
+			ray = check_collide()
+		else:
+			ray = false
 		if ray:
+			print(ray.name)
 			avoidance_pos = ray.to_global(ray.target_position)
 			set_state(states.avoid)
-			#move_to(avoidance_pos, delta)
-			
-			#return
 			nav.target_position = avoidance_pos
-			var marker = preload('res://scenes/effects/movement_marker.tscn')
-			var m = marker.instantiate()
-			m.global_position = avoidance_pos
-			get_parent().add_child(m)
+			direction = get_global_position().direction_to(avoidance_pos)
 			
 		var safe_velocity = SPEED * direction * delta
 		if nav.avoidance_enabled:
 			nav.set_velocity(safe_velocity)
 		else:
 			velocity = safe_velocity
-			move_and_slide()
 		anim.play('walk_'+get_animation_direction(direction))
 		move_and_slide()
 
 
 func check_collide():
 	var ray
-	if ray_top.is_colliding():
+	if ray_top.is_colliding() || ray_front.is_colliding():
 		ray = get_clear_direction(rays.get_node('Bottom'))
+		$CollideTimer.start()
 		return ray
 	elif ray_bottom.is_colliding():
 		ray = get_clear_direction(rays.get_node('Top'))
+		$CollideTimer.start()
 		return ray
 	return false
 
@@ -225,26 +212,17 @@ func update_path(point:Vector2):
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
-	
 
-#func get_clear_direction():
-	#for ray in rays.get_children():
-		#if(!ray.is_colliding()):
-			#return ray
-	#return null
 
 func get_clear_direction(node:Node2D):
 	for ray in node.get_children():
 		if(!ray.is_colliding()):
-			print(ray.name)
 			return ray
 	return null
 
 
 func stop():
-	#movement_target = get_global_position()
 	nav.target_position = get_global_position()
-	#set_state('idle')
 
 func get_animation_direction(degrees: Vector2) -> String:
 	var angle = atan2(degrees.y, degrees.x) * 180/PI

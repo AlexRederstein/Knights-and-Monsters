@@ -15,15 +15,6 @@ grow_vertical = 2
 texture = ExtResource("2_avxgj")
 stretch_mode = 5
 
-[node name="Background" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(590, 328)
-rotation = 3.14159
-scale = Vector2(0.614331, 0.603345)
-texture = ExtResource("2_avxgj")
-flip_h = true
-flip_v = true
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 9
 anchor_bottom = 1.0

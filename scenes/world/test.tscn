@@ -1122,6 +1122,8 @@ tile_set = SubResource("TileSet_lcrms")
 
 [node name="DireTower" parent="." instance=ExtResource("7_tyf0e")]
 position = Vector2(0, -2)
+collision_mask = 1
 
 [node name="HeroKnight" parent="." instance=ExtResource("2_3sfig")]
 position = Vector2(0, 62)
+collision_mask = 1
