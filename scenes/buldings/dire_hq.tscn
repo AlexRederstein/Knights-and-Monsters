@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgdmq1g2uk1tv"]
+[gd_scene load_steps=7 format=3 uid="uid://cgdmq1g2uk1tv"]
 
 [ext_resource type="PackedScene" uid="uid://ur6x7fnkh0cj" path="res://scenes/units/unit_entity.tscn" id="1_0eeau"]
+[ext_resource type="Script" path="res://script/units/dire_hq.gd" id="2_8s4fm"]
 [ext_resource type="Texture2D" uid="uid://bn1k6ril31pmi" path="res://asset/dire.png" id="2_ilq50"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x00m0"]
@@ -22,6 +23,7 @@ animations = [{
 }]
 
 [node name="DireHQ" instance=ExtResource("1_0eeau")]
+script = ExtResource("2_8s4fm")
 fraction = "dire"
 isbilding = true
 SPEED = 0
@@ -31,6 +33,6 @@ default_hp = 5000
 position = Vector2(-4, -10)
 shape = SubResource("CircleShape2D_x00m0")
 
-[node name="AnimatedSprite2D" parent="." index="11"]
+[node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_283fd")
 animation = &"idle"

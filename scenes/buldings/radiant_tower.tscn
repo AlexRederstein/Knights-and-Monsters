@@ -42,9 +42,8 @@ shape = SubResource("CircleShape2D_n1xlt")
 shape = SubResource("CircleShape2D_yuqjy")
 
 [node name="CollisionShape2D" parent="SelectArea" index="0"]
-position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_nk13y")
 
-[node name="AnimatedSprite2D" parent="." index="11"]
+[node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_ehghi")
 animation = &"idle"

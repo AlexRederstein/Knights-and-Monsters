@@ -16,16 +16,24 @@ class_name UNIT
 @export var SPEED:int = 3000 
 @export var default_damage = 0
 @export var default_hp = 0
+@export var reward_experience = 0
 
 #======================================================================
 
 @export_category('HERO STATS')
 @export var ishero = false
-
+@export var default_strengh = 0
+@export var strengh_increment = 0
+@onready var strenght = default_strengh
+@onready var default_level = 1
+@onready var current_level = default_level
+@onready var experience_for_next_level = 100
+@onready var current_experience = 0
 #======================================================================
 @onready var damage = default_damage
-@onready var max_hp = default_hp
+@onready var max_hp = default_hp + strenght * 3
 @onready var hp = max_hp
+@onready var hp_recovery = 0
 #======================================================================
 
 # Технические переменные
@@ -42,11 +50,6 @@ class_name UNIT
 @onready var ray_top = $Rays2/TopFront
 @onready var ray_bottom = $Rays2/BottomFront
 
-#@onready var rays :Node2D = $Rays
-#@onready var ray_front :RayCast2D = $Rays/Front
-#@onready var ray_front1 :RayCast2D = $Rays/Front2
-#@onready var ray_front2 :RayCast2D = $Rays/Front3
-
 
 #======================================================================
 
@@ -58,8 +61,8 @@ enum CommandMode {
 var command_mode = CommandMode.NONE
 
 
-#======================================================================
 
+#======================================================================
 
 
 func _ready():
@@ -70,13 +73,17 @@ func _ready():
 	call_deferred('set_state', states.idle)
 	init()
 	anim.animation_finished.connect(animation_changed)
+	#player_is_dead.connect(dead_timer_start)
+	#nav.target_reached.connect(_navigation_finished)
 
 func animation_changed():
 	if anim.animation == 'death':
-		queue_free()
+		if ishero:
+			get_tree().root.get_child(0).start_player_death_countdown()
+		else:
+			queue_free()
 	else:
 		if(get_enemy_target()):
-			print('attack')
 			if attack_type == 'melee':
 				get_enemy_target().take_damage(damage)
 			else:
@@ -84,12 +91,17 @@ func animation_changed():
 			reload_attack()
 
 func init():
-	draw_border_for_area2d(self, '#ffffff32')
+	draw_border_for_area2d($SelectArea, '#ffffff32')
 	if isbilding:
+		if $attack_area/CollisionShape2D.shape:
+			draw_border_for_area2d($attack_area)
 		nav.avoidance_enabled = false
 		var obstacle :NavigationObstacle2D = NavigationObstacle2D.new()
 		obstacle.radius = 25
 		add_child(obstacle)
+
+#func dead_timer_start():
+	#print('test')
 
 
 func draw_border_for_area2d(area2d, color = '#000000'):
@@ -117,6 +129,11 @@ func _physics_process(delta: float) -> void:
 	boot_hp_bar()
 	if isdead:
 		return
+	if ishero:
+		update_stats(delta)
+	if get_enemy_target():
+		if get_enemy_target().isdead:
+			enemy_target = null
 	match state:
 		states.idle:
 			if !ishero:
@@ -125,8 +142,6 @@ func _physics_process(delta: float) -> void:
 		states.moving:
 			if command_mode == CommandMode.ATTACK_MOVE:
 				search_enemy()
-			#if nav.is_target_reached():
-				#set_state(states.idle)
 			move_to(movement_target, delta)
 		states.agro:
 			if get_enemy_target():
@@ -137,8 +152,6 @@ func _physics_process(delta: float) -> void:
 							reload_attack()
 				else:
 					if in_attack_range():
-						#move_to(get_global_position(), delta)
-						#stop()
 						if $Attacktimer.is_stopped():
 							anim.play('attack_'+get_animation_direction(global_position.direction_to(get_enemy_target().get_global_position())))
 						else:
@@ -146,6 +159,11 @@ func _physics_process(delta: float) -> void:
 							anim.stop()
 					else:
 						move_to(get_enemy_target().get_global_position(), delta)
+			else:
+				if command_mode == CommandMode.ATTACK_MOVE:
+					set_state(states.moving)
+				else:
+					set_state(states.idle)
 		states.avoid:
 			move_to(avoidance_pos, delta)
 
@@ -153,6 +171,25 @@ func boot_hp_bar():
 	$HpBar.max_value = max_hp
 	$HpBar.value = hp
 
+
+func update_stats(delta) -> void:
+	max_hp = default_hp + strenght * 3
+	hp_recovery = 0.25 + strenght * 0.03
+	#self.MAX_MANA = self.DEFAULT_MANA + (self.intelligence * 13)
+	#self.MANA_recovery = 0.25 + (self.intelligence * 0.04)
+	if(self.hp < self.max_hp):
+		hp += hp_recovery * delta
+	else:
+		hp = max_hp
+	#if(self.MANA < self.MAX_MANA):
+		#self.MANA += self.MANA_recovery * delta
+	#else:
+		#self.MANA = self.MAX_MANA
+	damage = default_damage + strenght
+	#self.hp_bar.max_value = self.MAX_HP
+	#self.hp_bar.value = self.HP
+	#self.mana_bar.max_value = self.MAX_MANA
+	#self.mana_bar.value = self.MANA
 
 
 #======================================================================
@@ -165,8 +202,17 @@ func move_to(point:Vector2, delta):
 		update_path(point)
 	if nav.is_navigation_finished():
 		if state == states.avoid:
+			if prev_state == states.moving:
+				nav.target_position = movement_target
 			set_state(prev_state)
-		return
+		elif state == states.moving:
+			set_state(states.idle)
+		#else:
+			#return
+		#state = prev_state
+		#set_state(prev_state)
+			#set_state(prev_state)
+		#return
 	else:
 		var direction = get_global_position().direction_to(nav.get_next_path_position())
 		rays.rotation = direction.angle()
@@ -179,7 +225,6 @@ func move_to(point:Vector2, delta):
 		else:
 			ray = false
 		if ray:
-			print(ray.name)
 			avoidance_pos = ray.to_global(ray.target_position)
 			set_state(states.avoid)
 			nav.target_position = avoidance_pos
@@ -193,6 +238,11 @@ func move_to(point:Vector2, delta):
 		anim.play('walk_'+get_animation_direction(direction))
 		move_and_slide()
 
+func _navigation_finished():
+	if state == states.avoid:
+		set_state(prev_state)
+		#if prev_state == states.moving:
+			
 
 func check_collide():
 	var ray
@@ -279,6 +329,7 @@ func take_damage(dmg):
 	
 func die():
 	isdead = true
+	drop_exp()
 	if isbilding:
 		queue_free()
 	else:
@@ -286,12 +337,11 @@ func die():
 
 func search_enemy():
 	for unit in $guard_area.get_overlapping_bodies():
-		if unit.fraction != fraction:
+		if unit.fraction != fraction and !unit.isdead:
 			set_enemy_target(unit)
 
 func _on_guard_area_body_exited(body: Node2D) -> void:
 	if(body == self.get_enemy_target()):
-		print('target_is_gone')
 		self.enemy_target = null
 		if command_mode == CommandMode.ATTACK_MOVE:
 			nav.target_position = movement_target
@@ -535,25 +585,21 @@ func _on_guard_area_body_exited(body: Node2D) -> void:
 			#else:
 				#self.died()
 #
-#func drop_exp():
-	#for unit in $'ExpArea'.get_overlapping_bodies():
-		#if unit.ISHERO and unit.fraction != self.fraction:
-			##print(unit)
-			#pool_exp(unit, self.reward_experience)
-			##unit.current_experience += self.reward_experience
-		##print(unit)
-#
-#func pool_exp(unit, reward):
-	#unit.current_experience += reward
-	#if unit.current_experience >= unit.experience_for_next_level:
-		##unit.level_up()
-		#unit.current_level += 1
+func drop_exp():
+	for unit in $'ExpArea'.get_overlapping_bodies():
+		if unit.ishero and unit.fraction != fraction:
+			pool_exp(unit, reward_experience)
+
+func pool_exp(unit, reward):
+	unit.current_experience += reward
+	if unit.current_experience >= unit.experience_for_next_level:
+		unit.current_level += 1
 		#unit.intelligence += unit.increase_intelligence
-		#unit.strenght += unit.increase_strenght
+		unit.strenght += unit.strengh_increment
 		#unit.agility += unit.increase_agility
-#
-		#unit.current_experience -= unit.experience_for_next_level
-		#unit.experience_for_next_level = unit.experience_for_next_level / 100 * 130
+
+		unit.current_experience -= unit.experience_for_next_level
+		unit.experience_for_next_level += unit.experience_for_next_level / 100 * 30
 #
 #
 #

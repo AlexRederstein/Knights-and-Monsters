@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://v046vn4gg7ke"]
+[gd_scene load_steps=61 format=3 uid="uid://v046vn4gg7ke"]
 
 [ext_resource type="PackedScene" uid="uid://ur6x7fnkh0cj" path="res://scenes/units/unit_entity.tscn" id="1_mghya"]
 [ext_resource type="Script" path="res://script/units/hero_knight.gd" id="2_l1qdf"]
@@ -106,6 +106,18 @@ region = Rect2(223, 525, 73, 75)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3h1tr"]
 atlas = ExtResource("4_2a0vu")
 region = Rect2(223, 600, 73, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ljpa"]
+atlas = ExtResource("4_2a0vu")
+region = Rect2(84, 666, 70, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fect2"]
+atlas = ExtResource("4_2a0vu")
+region = Rect2(230, 666, 70, 82)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8fu7"]
+atlas = ExtResource("4_2a0vu")
+region = Rect2(1, 738, 68, 66)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_15wk8"]
 atlas = ExtResource("4_2a0vu")
@@ -318,6 +330,20 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ljpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fect2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8fu7")
+}],
+"loop": false,
+"name": &"death",
+"speed": 2.0
+}, {
+"frames": [{
 "duration": 3.0,
 "texture": SubResource("AtlasTexture_15wk8")
 }, {
@@ -434,21 +460,20 @@ animations = [{
 
 [node name="HeroKnight" instance=ExtResource("1_mghya")]
 script = ExtResource("2_l1qdf")
-invicible = true
 SPEED = 5000
-default_hp = 500000
+default_damage = 50
 ishero = true
+default_strengh = 25
+strengh_increment = 3
 
 [node name="CollisionShape2D" parent="attack_area" index="0"]
 shape = SubResource("CircleShape2D_337ok")
 
-[node name="Sprite2D" parent="." index="10"]
+[node name="Sprite2D" parent="." index="11"]
 scale = Vector2(0.1875, 0.1875)
-
-[node name="Camera2D" type="Camera2D" parent="." index="11"]
-offset = Vector2(5, 5)
-zoom = Vector2(2, 2)
 
 [node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_agprb")
-animation = &"idle"
+animation = &"death"
+frame = 2
+frame_progress = 1.0

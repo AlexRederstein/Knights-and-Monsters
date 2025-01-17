@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-
+func _ready():
+	get_tree().paused = false
+	
 
 func _on_quit_pressed():
 	get_tree().quit()

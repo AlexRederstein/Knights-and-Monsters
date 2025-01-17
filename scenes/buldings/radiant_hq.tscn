@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dslohbwqhaxg0"]
+[gd_scene load_steps=7 format=3 uid="uid://dslohbwqhaxg0"]
 
 [ext_resource type="PackedScene" uid="uid://ur6x7fnkh0cj" path="res://scenes/units/unit_entity.tscn" id="1_t5nqa"]
+[ext_resource type="Script" path="res://script/units/radiant_hq.gd" id="2_jtm01"]
 [ext_resource type="Texture2D" uid="uid://bqw3ri3fupnpi" path="res://asset/radiant.png" id="2_keajc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o772s"]
@@ -22,13 +23,12 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" instance=ExtResource("1_t5nqa")]
-isbilding = true
-SPEED = 0.0
-default_hp = 5000
+script = ExtResource("2_jtm01")
+default_hp = 0
 
 [node name="CollisionShape2D" parent="SelectArea" index="0"]
 shape = SubResource("CircleShape2D_o772s")
 
-[node name="AnimatedSprite2D" parent="." index="11"]
+[node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_pr4uw")
 animation = &"idle"

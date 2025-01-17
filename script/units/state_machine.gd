@@ -26,30 +26,7 @@ func check_collide_areas(delta):
 				#self.move_and_slide()
 				#break
 
-func update_stats(delta = 0) -> void:
-	if(self.time_to_next_attack > 0):
-		self.time_to_next_attack -= delta
-	else:
-		self.time_to_next_attack = 0
-	if !self.ISBILDING:
-		if(self.ISHERO):
-			self.MAX_HP = self.DEFAULT_HP + (self.strenght * 3)
-			self.HP_recovery = 0.25 + (self.strenght * 0.03)
-			self.MAX_MANA = self.DEFAULT_MANA + (self.intelligence * 13)
-			self.MANA_recovery = 0.25 + (self.intelligence * 0.04)
-		if(self.HP < self.MAX_HP):
-			self.HP += self.HP_recovery * delta
-		else:
-			self.HP = self.MAX_HP
-		if(self.MANA < self.MAX_MANA):
-			self.MANA += self.MANA_recovery * delta
-		else:
-			self.MANA = self.MAX_MANA
-	self.damage = self.DEFAULT_DAMAGE + self.strenght
-	self.hp_bar.max_value = self.MAX_HP
-	self.hp_bar.value = self.HP
-	self.mana_bar.max_value = self.MAX_MANA
-	self.mana_bar.value = self.MANA
+
 
 
 

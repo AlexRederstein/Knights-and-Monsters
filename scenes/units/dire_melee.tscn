@@ -470,10 +470,11 @@ script = ExtResource("2_7k0cr")
 fraction = "dire"
 default_damage = 20
 default_hp = 550
+reward_experience = 20
 
 [node name="CollisionShape2D" parent="attack_area" index="0"]
 shape = SubResource("CircleShape2D_aiwgg")
 
-[node name="AnimatedSprite2D" parent="." index="11"]
+[node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_cbwgn")
 animation = &"walk_s"

@@ -473,9 +473,6 @@ default_hp = 550
 [node name="CollisionShape2D" parent="attack_area" index="0"]
 shape = SubResource("CircleShape2D_x0tn0")
 
-[node name="SelectArea" parent="." index="8"]
-visible = true
-
-[node name="AnimatedSprite2D" parent="." index="11"]
+[node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_oyv0y")
 animation = &"idle"
