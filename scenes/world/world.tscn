@@ -1139,6 +1139,9 @@ autostart = true
 wait_time = 4.0
 one_shot = true
 
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="Spawners"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://p2h3gh1hd6g1"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_6rdtr"]
+[ext_resource type="Texture2D" uid="uid://dqgbv6yk8t8w3" path="res://asset/icons/BTNGoldRing.webp" id="2_qborb"]
+
+[node name="RingOfPower" instance=ExtResource("1_6rdtr")]
+texture_normal = ExtResource("2_qborb")
+item_name = "Кольцо могущества"
+price = 5000
+strenght = 30
+intelligence = 30
+agility = 30

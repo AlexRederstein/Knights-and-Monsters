@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl1htw3mykuwa"]
+
+[ext_resource type="PackedScene" uid="uid://dj255ddvuc1wu" path="res://scenes/spells/spell_entity.tscn" id="1_ulode"]
+[ext_resource type="Texture2D" uid="uid://bwxwb26ki8be7" path="res://asset/icons/spells/BTNDivineIntervention.webp" id="2_lakkg"]
+[ext_resource type="Script" path="res://script/spells/divine_shield.gd" id="3_pruyx"]
+
+[node name="DivineShield" instance=ExtResource("1_ulode")]
+texture_normal = ExtResource("2_lakkg")
+script = ExtResource("3_pruyx")
+spell_name = "Божественный щит"
+description = "Создаёт щит вокруг героя"
+isdirected = false
+spell_target_allies = false
+duration = 10
+cooldown = 60

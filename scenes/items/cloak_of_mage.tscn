@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddmgbdm0x8w0j"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_pxg7k"]
+[ext_resource type="Texture2D" uid="uid://8aq13e8sa5ur" path="res://asset/icons/BTNRobeOfTheMagi.webp" id="2_p8kfl"]
+
+[node name="CloakOfMage" instance=ExtResource("1_pxg7k")]
+texture_normal = ExtResource("2_p8kfl")
+item_name = "Плащ Архимага"
+price = 400
+intelligence = 10

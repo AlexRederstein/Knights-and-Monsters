@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpap6eg2y76di"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_apwea"]
+[ext_resource type="Texture2D" uid="uid://d35xbwqpvc67x" path="res://asset/icons/BTNRingJadeFalcon.webp" id="2_a1kx0"]
+
+[node name="RingOfThief" instance=ExtResource("1_apwea")]
+texture_normal = ExtResource("2_a1kx0")
+item_name = "Кольцо вора"
+agility = 3

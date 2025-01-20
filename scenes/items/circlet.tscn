@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://g2787stuh3hk"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_qfi81"]
+[ext_resource type="Texture2D" uid="uid://dhlug6lrsm858" path="res://asset/icons/BTNCirclet.webp" id="2_t86aa"]
+
+[node name="Circlet" instance=ExtResource("1_qfi81")]
+texture_normal = ExtResource("2_t86aa")
+item_name = "Диадема"
+price = 300
+strenght = 2
+intelligence = 2
+agility = 2

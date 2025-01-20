@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt7c35cbdl03o"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_540k2"]
+[ext_resource type="Texture2D" uid="uid://cunescymyxhxh" path="res://asset/icons/BTNHelmutPurple.webp" id="2_ij2o1"]
+
+[node name="HelmOfWarrior" instance=ExtResource("1_540k2")]
+texture_normal = ExtResource("2_ij2o1")
+item_name = "Шлем воина"
+price = 800
+strenght = 10
+intelligence = 10
+agility = 10

@@ -1,0 +1,502 @@
+[gd_scene load_steps=14 format=3 uid="uid://ddeps2b6yr3if"]
+
+[ext_resource type="Script" path="res://script/effects/camera.gd" id="1_1xmie"]
+[ext_resource type="Script" path="res://script/effects/player_ui.gd" id="1_gvuj7"]
+[ext_resource type="Texture2D" uid="uid://c577p1bvajiag" path="res://icon.svg" id="1_v142v"]
+[ext_resource type="Texture2D" uid="uid://0u63i3dpwm03" path="res://asset/BTNArmorGolem.webp" id="4_x7bfn"]
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="5_jt510"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn44x"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0gtc"]
+bg_color = Color(0, 0.57313, 5.77569e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kak55"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8uwo4"]
+bg_color = Color(0.59205, 0.0490828, 0.597678, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_om7gq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sygap"]
+bg_color = Color(0.027451, 0.105882, 0.94902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baqqa"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v44ac"]
+bg_color = Color(0, 0.572549, 0, 1)
+
+[node name="Camera2D" type="Camera2D"]
+offset = Vector2(5, 5)
+zoom = Vector2(2, 2)
+script = ExtResource("1_1xmie")
+
+[node name="Player_UI" type="CanvasLayer" parent="."]
+script = ExtResource("1_gvuj7")
+
+[node name="Panel" type="VBoxContainer" parent="Player_UI"]
+custom_minimum_size = Vector2(650, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -325.0
+offset_top = -135.0
+offset_right = 325.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="HSplitContainer" type="GridContainer" parent="Player_UI/Panel"]
+layout_mode = 2
+columns = 3
+
+[node name="Attributes" type="GridContainer" parent="Player_UI/Panel/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+columns = 2
+
+[node name="Label" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "Сила"
+
+[node name="Strength" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "0"
+
+[node name="Label3" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "Ловкость"
+
+[node name="Agility" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "0"
+
+[node name="Label5" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "Интеллект"
+
+[node name="Intelligence" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "0"
+
+[node name="Attributes2" type="GridContainer" parent="Player_UI/Panel/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+columns = 2
+
+[node name="Label" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes2"]
+layout_mode = 2
+text = "Атака"
+
+[node name="Damage" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes2"]
+layout_mode = 2
+text = "0"
+
+[node name="Label3" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes2"]
+layout_mode = 2
+text = "Броня"
+
+[node name="Armor" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes2"]
+layout_mode = 2
+text = "0"
+
+[node name="Label5" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes2"]
+layout_mode = 2
+text = "Скорость"
+
+[node name="Speed" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes2"]
+layout_mode = 2
+text = "0"
+
+[node name="AbilityIcons" type="GridContainer" parent="Player_UI/Panel/HSplitContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+columns = 4
+
+[node name="TextureRect" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+texture = ExtResource("1_v142v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
+layout_mode = 2
+texture = ExtResource("1_v142v")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
+layout_mode = 2
+texture = ExtResource("1_v142v")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
+layout_mode = 2
+texture = ExtResource("1_v142v")
+expand_mode = 2
+
+[node name="LevelContainer" type="GridContainer" parent="Player_UI/Panel/HSplitContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Player_UI/Panel/HSplitContainer/LevelContainer"]
+layout_mode = 2
+text = "Уровень:"
+
+[node name="CurrentLevel" type="Label" parent="Player_UI/Panel/HSplitContainer/LevelContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="GridContainer" type="VBoxContainer" parent="Player_UI/Panel"]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="Player_UI/Panel/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_wn44x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n0gtc")
+value = 70.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/Panel/GridContainer/HPBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.473077
+anchor_right = 0.526923
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HP_label" type="Label" parent="Player_UI/Panel/GridContainer/HPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
+[node name="Label2" type="Label" parent="Player_UI/Panel/GridContainer/HPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "/
+"
+
+[node name="MAX_HP_label" type="Label" parent="Player_UI/Panel/GridContainer/HPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
+[node name="HPIncrementLabel" type="Label" parent="Player_UI/Panel/GridContainer/HPBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0.0"
+
+[node name="EXPBar" type="ProgressBar" parent="Player_UI/Panel/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_kak55")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8uwo4")
+value = 70.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/Panel/GridContainer/EXPBar"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_right = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EXP_label" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
+[node name="Label2" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "/
+"
+
+[node name="MAX_EXP_label" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
+[node name="ManaBar" type="ProgressBar" parent="Player_UI/Panel/GridContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_om7gq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sygap")
+value = 70.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/Panel/GridContainer/ManaBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -12.5
+offset_right = 44.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MANA_label" type="Label" parent="Player_UI/Panel/GridContainer/ManaBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
+[node name="Label2" type="Label" parent="Player_UI/Panel/GridContainer/ManaBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "/
+"
+
+[node name="MAX_MANA_label" type="Label" parent="Player_UI/Panel/GridContainer/ManaBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
+[node name="DeathTimerControl" type="MarginContainer" parent="Player_UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -190.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/DeathTimerControl"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Player_UI/DeathTimerControl/HBoxContainer"]
+layout_mode = 2
+text = "Возрождение через:"
+
+[node name="DeathTimer" type="Label" parent="Player_UI/DeathTimerControl/HBoxContainer"]
+layout_mode = 2
+text = "00"
+
+[node name="TimerContainer" type="HBoxContainer" parent="Player_UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Timer" type="Label" parent="Player_UI/TimerContainer"]
+layout_mode = 2
+text = "00:00"
+
+[node name="IconContainer" type="MarginContainer" parent="Player_UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Player_UI/IconContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureButton" type="TextureButton" parent="Player_UI/IconContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_x7bfn")
+
+[node name="IconHPBar" type="ProgressBar" parent="Player_UI/IconContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_baqqa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v44ac")
+value = 70.0
+show_percentage = false
+
+[node name="InventoryContainer" type="MarginContainer" parent="Player_UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -136.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player_UI/InventoryContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Player_UI/InventoryContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 3
+
+[node name="Item1" type="TextureButton" parent="Player_UI/InventoryContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_v142v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Item2" type="TextureButton" parent="Player_UI/InventoryContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_v142v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Item3" type="TextureButton" parent="Player_UI/InventoryContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_v142v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Item4" type="TextureButton" parent="Player_UI/InventoryContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_v142v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Item5" type="TextureButton" parent="Player_UI/InventoryContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_v142v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Item6" type="TextureButton" parent="Player_UI/InventoryContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_v142v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/InventoryContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Player_UI/InventoryContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Золото:"
+
+[node name="GoldLabel" type="Label" parent="Player_UI/InventoryContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0
+"
+
+[node name="ShopContainer" type="PanelContainer" parent="Player_UI"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -242.0
+offset_top = -88.0
+offset_bottom = 173.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/ShopContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player_UI/ShopContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Магазин"
+
+[node name="GridContainer" type="GridContainer" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 4
+
+[node name="ItemEntity" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[node name="ItemEntity2" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[node name="ItemEntity3" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[node name="ItemEntity4" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[node name="ItemEntity5" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[node name="ItemEntity6" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[node name="ItemEntity7" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[node name="ItemEntity8" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("5_jt510")]
+layout_mode = 2
+
+[connection signal="pressed" from="Player_UI/IconContainer/HBoxContainer/TextureButton" to="Player_UI" method="_on_texture_button_pressed"]

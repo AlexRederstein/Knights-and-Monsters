@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbg2hs2y8jt4t"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_qxj4k"]
+[ext_resource type="Texture2D" uid="uid://clpoiclt31pn4" path="res://asset/icons/BTNStaffOfSilence.webp" id="2_gyhyd"]
+
+[node name="StaffOfintelligence" instance=ExtResource("1_qxj4k")]
+texture_normal = ExtResource("2_gyhyd")
+item_name = "Посох всезнания"
+price = 2500
+intelligence = 30

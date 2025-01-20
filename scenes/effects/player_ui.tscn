@@ -1,9 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://ddeps2b6yr3if"]
+[gd_scene load_steps=30 format=3 uid="uid://ddeps2b6yr3if"]
 
 [ext_resource type="Script" path="res://script/effects/camera.gd" id="1_1xmie"]
 [ext_resource type="Script" path="res://script/effects/player_ui.gd" id="1_gvuj7"]
-[ext_resource type="Texture2D" uid="uid://c577p1bvajiag" path="res://icon.svg" id="1_v142v"]
+[ext_resource type="PackedScene" uid="uid://bjkivgvdcunpe" path="res://scenes/spells/repel.tscn" id="3_mdv1k"]
+[ext_resource type="PackedScene" uid="uid://dl1htw3mykuwa" path="res://scenes/spells/divine_shield.tscn" id="4_1ji1g"]
 [ext_resource type="Texture2D" uid="uid://0u63i3dpwm03" path="res://asset/BTNArmorGolem.webp" id="4_x7bfn"]
+[ext_resource type="Texture2D" uid="uid://bcyapd5tqceix" path="res://asset/icons/empty_slot.webp" id="5_6t71m"]
+[ext_resource type="PackedScene" uid="uid://gvkkqqjdldvd" path="res://scenes/spells/devotion.tscn" id="5_wndjq"]
+[ext_resource type="PackedScene" uid="uid://ds3dm6ueshijv" path="res://scenes/items/ogre_gloves.tscn" id="6_8iex5"]
+[ext_resource type="PackedScene" uid="uid://cqrf7rmjqofhh" path="res://scenes/items/belt_of_strenght.tscn" id="7_6addn"]
+[ext_resource type="PackedScene" uid="uid://g2787stuh3hk" path="res://scenes/items/circlet.tscn" id="8_5d5ec"]
+[ext_resource type="PackedScene" uid="uid://bpap6eg2y76di" path="res://scenes/items/ring_of_thief.tscn" id="8_ohy2v"]
+[ext_resource type="PackedScene" uid="uid://bo854w8kfmtwx" path="res://scenes/items/mantle_of_intelligence.tscn" id="9_4d4td"]
+[ext_resource type="PackedScene" uid="uid://ddmgbdm0x8w0j" path="res://scenes/items/cloak_of_mage.tscn" id="11_wfxwr"]
+[ext_resource type="PackedScene" uid="uid://cw6j7wyng5yqv" path="res://scenes/items/cloak_of_assasin.tscn" id="12_vkhdh"]
+[ext_resource type="PackedScene" uid="uid://bt7c35cbdl03o" path="res://scenes/items/helm_of_warrior.tscn" id="13_p5305"]
+[ext_resource type="PackedScene" uid="uid://soim6wsw5qxy" path="res://scenes/items/demon_gloves.tscn" id="14_25u1l"]
+[ext_resource type="PackedScene" uid="uid://cbg2hs2y8jt4t" path="res://scenes/items/staff_ofintelligence.tscn" id="15_1y0j5"]
+[ext_resource type="PackedScene" uid="uid://m1pnlq4dbsgs" path="res://scenes/items/gloves_of_agility.tscn" id="16_fjh8a"]
+[ext_resource type="PackedScene" uid="uid://p2h3gh1hd6g1" path="res://scenes/items/ring_of_power.tscn" id="17_n03g3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn44x"]
 bg_color = Color(0, 0, 0, 1)
@@ -11,22 +26,29 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n0gtc"]
 bg_color = Color(0, 0.57313, 5.77569e-07, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_om7gq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sygap"]
+bg_color = Color(0.027451, 0.105882, 0.94902, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kak55"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8uwo4"]
 bg_color = Color(0.59205, 0.0490828, 0.597678, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_om7gq"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sygap"]
-bg_color = Color(0.027451, 0.105882, 0.94902, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_baqqa"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v44ac"]
 bg_color = Color(0, 0.572549, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_keypl"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kis6"]
+bg_color = Color(0.027451, 0.105882, 0.94902, 1)
 
 [node name="Camera2D" type="Camera2D"]
 offset = Vector2(5, 5)
@@ -51,9 +73,16 @@ grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 
+[node name="TipLabel" type="Label" parent="Player_UI/Panel"]
+layout_mode = 2
+
+[node name="Timer" type="Timer" parent="Player_UI/Panel/TipLabel"]
+wait_time = 5.0
+one_shot = true
+
 [node name="HSplitContainer" type="GridContainer" parent="Player_UI/Panel"]
 layout_mode = 2
-columns = 3
+columns = 4
 
 [node name="Attributes" type="GridContainer" parent="Player_UI/Panel/HSplitContainer"]
 layout_mode = 2
@@ -69,19 +98,19 @@ text = "Сила"
 layout_mode = 2
 text = "0"
 
-[node name="Label3" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
-layout_mode = 2
-text = "Ловкость"
-
-[node name="Agility" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
-layout_mode = 2
-text = "0"
-
 [node name="Label5" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
 layout_mode = 2
 text = "Интеллект"
 
 [node name="Intelligence" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "0"
+
+[node name="Label3" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
+layout_mode = 2
+text = "Ловкость"
+
+[node name="Agility" type="Label" parent="Player_UI/Panel/HSplitContainer/Attributes"]
 layout_mode = 2
 text = "0"
 
@@ -116,33 +145,22 @@ layout_mode = 2
 text = "0"
 
 [node name="AbilityIcons" type="GridContainer" parent="Player_UI/Panel/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="Repel" parent="Player_UI/Panel/HSplitContainer/AbilityIcons" instance=ExtResource("3_mdv1k")]
+layout_mode = 2
+ignore_texture_size = false
+
+[node name="DivineShield" parent="Player_UI/Panel/HSplitContainer/AbilityIcons" instance=ExtResource("4_1ji1g")]
+layout_mode = 2
+ignore_texture_size = false
+
+[node name="Devotion" parent="Player_UI/Panel/HSplitContainer/AbilityIcons" instance=ExtResource("5_wndjq")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-columns = 4
-
-[node name="TextureRect" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-texture = ExtResource("1_v142v")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextureRect2" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
-layout_mode = 2
-texture = ExtResource("1_v142v")
-expand_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
-layout_mode = 2
-texture = ExtResource("1_v142v")
-expand_mode = 2
-
-[node name="TextureRect4" type="TextureRect" parent="Player_UI/Panel/HSplitContainer/AbilityIcons"]
-layout_mode = 2
-texture = ExtResource("1_v142v")
-expand_mode = 2
+ignore_texture_size = false
 
 [node name="LevelContainer" type="GridContainer" parent="Player_UI/Panel/HSplitContainer"]
 layout_mode = 2
@@ -170,17 +188,13 @@ show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/Panel/GridContainer/HPBar"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -12.5
-offset_right = 18.0
-offset_bottom = 12.5
+anchors_preset = -1
+anchor_left = 0.473077
+anchor_right = 0.526923
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="HP_label" type="Label" parent="Player_UI/Panel/GridContainer/HPBar/HBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
@@ -200,50 +214,24 @@ layout_mode = 2
 text = "0
 "
 
-[node name="EXPBar" type="ProgressBar" parent="Player_UI/Panel/GridContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_kak55")
-theme_override_styles/fill = SubResource("StyleBoxFlat_8uwo4")
-value = 70.0
-show_percentage = false
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/Panel/GridContainer/EXPBar"]
+[node name="HPIncrementLabel" type="Label" parent="Player_UI/Panel/GridContainer/HPBar"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
+offset_left = -23.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
 grow_vertical = 2
-
-[node name="EXP_label" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-text = "0
-"
-
-[node name="Label2" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-text = "/
-"
-
-[node name="MAX_EXP_label" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-text = "0
-"
+text = "0.0"
 
 [node name="ManaBar" type="ProgressBar" parent="Player_UI/Panel/GridContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_styles/background = SubResource("StyleBoxFlat_om7gq")
 theme_override_styles/fill = SubResource("StyleBoxFlat_sygap")
 value = 70.0
@@ -256,9 +244,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -44.5
+offset_left = -17.5
 offset_top = -12.5
-offset_right = 44.5
+offset_right = 17.5
 offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -281,8 +269,59 @@ layout_mode = 2
 text = "0
 "
 
+[node name="ManaIncrementLabel" type="Label" parent="Player_UI/Panel/GridContainer/ManaBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0.0"
+
+[node name="EXPBar" type="ProgressBar" parent="Player_UI/Panel/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_kak55")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8uwo4")
+value = 70.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/Panel/GridContainer/EXPBar"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.5
+offset_right = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EXP_label" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
+[node name="Label2" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "/
+"
+
+[node name="MAX_EXP_label" type="Label" parent="Player_UI/Panel/GridContainer/EXPBar/HBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0
+"
+
 [node name="DeathTimerControl" type="MarginContainer" parent="Player_UI"]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -316,9 +355,6 @@ grow_horizontal = 2
 layout_mode = 2
 text = "00:00"
 
-[node name="GameTimer" type="Timer" parent="Player_UI/TimerContainer"]
-autostart = true
-
 [node name="IconContainer" type="MarginContainer" parent="Player_UI"]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -341,5 +377,167 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_v44ac")
 value = 70.0
 show_percentage = false
 
-[connection signal="timeout" from="Player_UI/TimerContainer/GameTimer" to="Player_UI" method="_on_game_timer_timeout"]
+[node name="IconManaBar" type="ProgressBar" parent="Player_UI/IconContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_keypl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0kis6")
+value = 70.0
+show_percentage = false
+
+[node name="InventoryContainer" type="MarginContainer" parent="Player_UI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -136.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player_UI/InventoryContainer"]
+layout_mode = 2
+
+[node name="Inventory" type="GridContainer" parent="Player_UI/InventoryContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+columns = 3
+
+[node name="Item1" type="TextureRect" parent="Player_UI/InventoryContainer/VBoxContainer/Inventory"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_6t71m")
+
+[node name="Item2" type="TextureRect" parent="Player_UI/InventoryContainer/VBoxContainer/Inventory"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_6t71m")
+
+[node name="Item3" type="TextureRect" parent="Player_UI/InventoryContainer/VBoxContainer/Inventory"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_6t71m")
+
+[node name="Item4" type="TextureRect" parent="Player_UI/InventoryContainer/VBoxContainer/Inventory"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_6t71m")
+
+[node name="Item5" type="TextureRect" parent="Player_UI/InventoryContainer/VBoxContainer/Inventory"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_6t71m")
+
+[node name="Item6" type="TextureRect" parent="Player_UI/InventoryContainer/VBoxContainer/Inventory"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_6t71m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Player_UI/InventoryContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Player_UI/InventoryContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Золото:"
+
+[node name="GoldLabel" type="Label" parent="Player_UI/InventoryContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0
+"
+
+[node name="ShopContainer" type="PanelContainer" parent="Player_UI"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -260.0
+offset_bottom = 124.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Player_UI/ShopContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Player_UI/ShopContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Магазин"
+
+[node name="GridContainer" type="GridContainer" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 4
+
+[node name="OgreGloves" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("6_8iex5")]
+layout_mode = 2
+
+[node name="MantleOfIntelligence" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("9_4d4td")]
+layout_mode = 2
+
+[node name="RingOfThief" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("8_ohy2v")]
+layout_mode = 2
+
+[node name="Circlet" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("8_5d5ec")]
+layout_mode = 2
+
+[node name="BeltOfStrenght" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("7_6addn")]
+layout_mode = 2
+
+[node name="CloakOfMage" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("11_wfxwr")]
+layout_mode = 2
+
+[node name="CloakOfAssasin" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("12_vkhdh")]
+layout_mode = 2
+
+[node name="HelmOfWarrior" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("13_p5305")]
+layout_mode = 2
+
+[node name="DemonGloves" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("14_25u1l")]
+layout_mode = 2
+
+[node name="StaffOfintelligence" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("15_1y0j5")]
+layout_mode = 2
+
+[node name="GlovesOfAgility" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("16_fjh8a")]
+layout_mode = 2
+
+[node name="RingOfPower" parent="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("17_n03g3")]
+layout_mode = 2
+
+[connection signal="timeout" from="Player_UI/Panel/TipLabel/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Player_UI/IconContainer/HBoxContainer/TextureButton" to="Player_UI" method="_on_texture_button_pressed"]
+[connection signal="gui_input" from="Player_UI/ShopContainer/MarginContainer/VBoxContainer/GridContainer" to="Player_UI" method="_on_grid_container_gui_input"]

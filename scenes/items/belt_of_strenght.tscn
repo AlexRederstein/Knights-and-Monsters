@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqrf7rmjqofhh"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_b4l5e"]
+[ext_resource type="Texture2D" uid="uid://c0cxmyluv35nq" path="res://asset/icons/BTNBelt.webp" id="2_rqfgp"]
+
+[node name="BeltOfStrenght" instance=ExtResource("1_b4l5e")]
+texture_normal = ExtResource("2_rqfgp")
+item_name = "Пояс богатыря"
+price = 400
+strenght = 10
+
+[node name="SellButton" parent="." index="1"]
+visible = false

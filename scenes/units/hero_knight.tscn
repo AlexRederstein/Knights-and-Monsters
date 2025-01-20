@@ -462,9 +462,16 @@ animations = [{
 script = ExtResource("2_l1qdf")
 SPEED = 5000
 default_damage = 50
+default_hp = 500.0
+default_mana = 200.0
+default_armor = 5
 ishero = true
 default_strengh = 25
+default_intelligence = 15
+default_agility = 15
 strengh_increment = 3
+intelligence_increment = 1
+agility_increment = 1
 
 [node name="CollisionShape2D" parent="attack_area" index="0"]
 shape = SubResource("CircleShape2D_337ok")
@@ -474,6 +481,4 @@ scale = Vector2(0.1875, 0.1875)
 
 [node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_agprb")
-animation = &"death"
-frame = 2
-frame_progress = 1.0
+animation = &"attack_n"

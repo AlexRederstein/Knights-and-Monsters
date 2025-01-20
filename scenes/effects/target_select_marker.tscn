@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cexl4d0kf7an2"]
+
+[ext_resource type="Texture2D" uid="uid://b8766v8b6g4ff" path="res://asset/movement_marker/Movement_marker35.png" id="1_36uk6"]
+
+[node name="MovementMarker35" type="Sprite2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_36uk6")

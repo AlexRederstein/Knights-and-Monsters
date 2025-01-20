@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjkivgvdcunpe"]
+
+[ext_resource type="PackedScene" uid="uid://dj255ddvuc1wu" path="res://scenes/spells/spell_entity.tscn" id="1_qd48g"]
+[ext_resource type="Texture2D" uid="uid://dyictd31p67hg" path="res://asset/icons/spells/BTNHolyBolt.webp" id="2_bpxyf"]
+[ext_resource type="Script" path="res://script/spells/repel.gd" id="3_ulnbk"]
+
+[node name="Repel" instance=ExtResource("1_qd48g")]
+texture_normal = ExtResource("2_bpxyf")
+script = ExtResource("3_ulnbk")
+spell_name = "Благодать"
+description = "Излечивает союзника"

@@ -15,25 +15,59 @@ class_name UNIT
 
 @export var SPEED:int = 3000 
 @export var default_damage = 0
-@export var default_hp = 0
+
+@export var default_hp :float = 0
+@export var default_mana :float = 0
+@export var default_armor :int = 0
+
+
+
 @export var reward_experience = 0
+@export var reward_gold = 0
 
 #======================================================================
 
 @export_category('HERO STATS')
 @export var ishero = false
+
 @export var default_strengh = 0
+@export var default_intelligence = 0
+@export var default_agility = 0
+
 @export var strengh_increment = 0
+@export var intelligence_increment = 0
+@export var agility_increment = 0
+
 @onready var strenght = default_strengh
+@onready var intelligence = default_intelligence
+@onready var agility = default_agility
+
 @onready var default_level = 1
 @onready var current_level = default_level
 @onready var experience_for_next_level = 100
 @onready var current_experience = 0
+
+@onready var current_gold = 0
+
+@onready var inventory_stats = {
+	'strenght': 0,
+	'intelligence': 0,
+	'agility': 0,
+	'armor': 0,
+}
 #======================================================================
 @onready var damage = default_damage
-@onready var max_hp = default_hp + strenght * 3
-@onready var hp = max_hp
-@onready var hp_recovery = 0
+
+@onready var max_hp :float = default_hp + strenght * 3
+@onready var hp :float = max_hp
+@onready var hp_recovery :float = 0
+
+@onready var max_mana :float = default_mana + intelligence * 5
+@onready var mana :float = max_mana
+@onready var mana_recovery :float = 0
+
+@onready var armor :int = default_armor
+
 #======================================================================
 
 # Технические переменные
@@ -85,7 +119,7 @@ func animation_changed():
 	else:
 		if(get_enemy_target()):
 			if attack_type == 'melee':
-				get_enemy_target().take_damage(damage)
+				get_enemy_target().take_damage(damage, self)
 			else:
 				range_attack()
 			reload_attack()
@@ -127,6 +161,7 @@ func draw_border_for_area2d(area2d, color = '#000000'):
 
 func _physics_process(delta: float) -> void:
 	boot_hp_bar()
+	anim.set_speed_scale(1)
 	if isdead:
 		return
 	if ishero:
@@ -153,6 +188,8 @@ func _physics_process(delta: float) -> void:
 				else:
 					if in_attack_range():
 						if $Attacktimer.is_stopped():
+							if ishero:
+								anim.set_speed_scale(agility * 0.05)
 							anim.play('attack_'+get_animation_direction(global_position.direction_to(get_enemy_target().get_global_position())))
 						else:
 							anim.play('attack_'+get_animation_direction(global_position.direction_to(get_enemy_target().get_global_position())))
@@ -173,24 +210,36 @@ func boot_hp_bar():
 
 
 func update_stats(delta) -> void:
+
+	var current_hp_percent :float = hp / max_hp
+	var current_mana_percent = mana / max_mana
+	strenght = default_strengh + strengh_increment * current_level + inventory_stats['strenght']
+	intelligence = default_intelligence + intelligence_increment * current_level + inventory_stats['intelligence']
+	agility = default_agility + agility_increment * current_level + inventory_stats['agility']
+	
+	
 	max_hp = default_hp + strenght * 3
 	hp_recovery = 0.25 + strenght * 0.03
-	#self.MAX_MANA = self.DEFAULT_MANA + (self.intelligence * 13)
-	#self.MANA_recovery = 0.25 + (self.intelligence * 0.04)
-	if(self.hp < self.max_hp):
+	
+	
+	max_mana = default_mana + intelligence * 5
+	mana_recovery = 0.25 + intelligence * 0.04
+	
+	armor = default_armor + round(agility * 0.015)
+	
+	hp = max_hp * current_hp_percent
+	mana = max_mana * current_mana_percent
+	
+	if(hp < max_hp):
 		hp += hp_recovery * delta
 	else:
 		hp = max_hp
-	#if(self.MANA < self.MAX_MANA):
-		#self.MANA += self.MANA_recovery * delta
-	#else:
-		#self.MANA = self.MAX_MANA
+	if(mana < max_mana):
+		mana += mana_recovery * delta
+	else:
+		mana = max_mana
+		
 	damage = default_damage + strenght
-	#self.hp_bar.max_value = self.MAX_HP
-	#self.hp_bar.value = self.HP
-	#self.mana_bar.max_value = self.MAX_MANA
-	#self.mana_bar.value = self.MANA
-
 
 #======================================================================
 #============================== MOVEMENT ==============================
@@ -321,10 +370,14 @@ func range_attack():
 func reload_attack():
 	$Attacktimer.start()
 
-func take_damage(dmg):
+func take_damage(dmg, dealer):
+	print(invicible)
 	if !invicible:
 		hp -= dmg
-		if hp <= 0:
+		#print(hp)
+		if hp < 1:
+			if dealer.ishero:
+				dealer.get_extra_reward(reward_gold)
 			die()
 	
 func die():
@@ -594,12 +647,22 @@ func pool_exp(unit, reward):
 	unit.current_experience += reward
 	if unit.current_experience >= unit.experience_for_next_level:
 		unit.current_level += 1
-		#unit.intelligence += unit.increase_intelligence
-		unit.strenght += unit.strengh_increment
-		#unit.agility += unit.increase_agility
+		
+		#unit.strenght += unit.strengh_increment
+		#unit.intelligence += unit.intelligence_increment
+		#unit.agility += unit.agility_increment
 
 		unit.current_experience -= unit.experience_for_next_level
 		unit.experience_for_next_level += unit.experience_for_next_level / 100 * 30
+		
+		
+		
+		
+func get_extra_reward(reward):
+	current_gold += reward
+	var reward_label = preload('res://scenes/effects/gold_reward.tscn').instantiate()
+	reward_label.text = '+%s' % str(reward)
+	add_child(reward_label)
 #
 #
 #

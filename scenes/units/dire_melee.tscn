@@ -471,6 +471,7 @@ fraction = "dire"
 default_damage = 20
 default_hp = 550
 reward_experience = 20
+reward_gold = 25
 
 [node name="CollisionShape2D" parent="attack_area" index="0"]
 shape = SubResource("CircleShape2D_aiwgg")

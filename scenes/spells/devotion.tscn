@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://gvkkqqjdldvd"]
+
+[ext_resource type="PackedScene" uid="uid://dj255ddvuc1wu" path="res://scenes/spells/spell_entity.tscn" id="1_bhccf"]
+[ext_resource type="Texture2D" uid="uid://c7sdked01bjay" path="res://asset/icons/spells/PASBTNDevotion.webp" id="2_atyjl"]
+
+[node name="Devotion" instance=ExtResource("1_bhccf")]
+texture_normal = ExtResource("2_atyjl")
+spell_name = "Доспехи паладина"
+description = "Увеличивает броню героя и окружающих его союзников"
+isactive = false
+isdirected = false

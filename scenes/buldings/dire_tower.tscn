@@ -34,7 +34,7 @@ isbilding = true
 range_attack_projectile = ExtResource("2_q0fle")
 SPEED = 0
 default_damage = 150
-default_hp = 1500
+default_hp = 1500.0
 
 [node name="CollisionShape2D" parent="guard_area" index="0"]
 shape = SubResource("CircleShape2D_tapm7")
@@ -45,6 +45,6 @@ shape = SubResource("CircleShape2D_5hbxt")
 [node name="CollisionShape2D" parent="SelectArea" index="0"]
 shape = SubResource("CircleShape2D_p5uqr")
 
-[node name="AnimatedSprite2D" parent="." index="11"]
+[node name="AnimatedSprite2D" parent="." index="12"]
 sprite_frames = SubResource("SpriteFrames_d2fjh")
 animation = &"idle"

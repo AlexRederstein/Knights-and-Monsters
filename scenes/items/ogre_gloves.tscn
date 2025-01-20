@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds3dm6ueshijv"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_kkmjk"]
+[ext_resource type="Texture2D" uid="uid://dn22jhcxoslml" path="res://asset/icons/BTNGauntletsOfOgrePower.webp" id="2_l2uld"]
+
+[node name="OgreGloves" instance=ExtResource("1_kkmjk")]
+texture_normal = ExtResource("2_l2uld")
+strenght = 3

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo854w8kfmtwx"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_uwdt8"]
+[ext_resource type="Texture2D" uid="uid://bymlmv4bvppyh" path="res://asset/icons/BTNMantle.webp" id="2_s43p5"]
+
+[node name="MantleOfIntelligence" instance=ExtResource("1_uwdt8")]
+texture_normal = ExtResource("2_s43p5")
+item_name = "Мантия ученого"
+intelligence = 3

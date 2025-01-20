@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw6j7wyng5yqv"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_1l6pd"]
+[ext_resource type="Texture2D" uid="uid://ddxnrsbyboigs" path="res://asset/icons/BTNCloak.webp" id="2_fhi8e"]
+
+[node name="CloakOfAssasin" instance=ExtResource("1_1l6pd")]
+texture_normal = ExtResource("2_fhi8e")
+item_name = "Капюшон убийцы"
+price = 400
+agility = 10

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://m1pnlq4dbsgs"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_wpp80"]
+[ext_resource type="Texture2D" uid="uid://cut2ho7s5nbo8" path="res://asset/icons/BTNMagicImmunity.webp" id="2_tro35"]
+
+[node name="GlovesOfAgility" instance=ExtResource("1_wpp80")]
+texture_normal = ExtResource("2_tro35")
+item_name = "Волшебные перчатки"
+price = 2500
+agility = 30

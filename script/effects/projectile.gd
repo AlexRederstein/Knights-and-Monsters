@@ -24,5 +24,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: UNIT) -> void:
 	if(self.tar == body):
-		self.tar.take_damage(self.damage)
+		self.tar.take_damage(self.damage, get_parent())
 		queue_free()

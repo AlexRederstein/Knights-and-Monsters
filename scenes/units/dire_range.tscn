@@ -472,6 +472,7 @@ range_attack_projectile = ExtResource("2_qcqes")
 default_damage = 30
 default_hp = 300
 reward_experience = 50
+reward_gold = 50
 
 [node name="CollisionShape2D" parent="attack_area" index="0"]
 shape = SubResource("CircleShape2D_cpiqm")

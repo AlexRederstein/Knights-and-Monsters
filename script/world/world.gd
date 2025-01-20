@@ -9,40 +9,77 @@ var creeps = {
 }
 @onready var CreepTimer = $'CreepTimer'
 @onready var camera = preload('res://scenes/effects/player_ui.tscn').instantiate()
-@onready var player = preload('res://scenes/units/hero_knight.tscn').instantiate()
+@onready var inventory = camera.get_node('Player_UI/InventoryContainer/VBoxContainer/Inventory')
+@onready var time = 0
 
 
 func _ready():
 	get_tree().paused = false
-	player.global_position = $'PlayerSpawnPoint'.global_position
-	add_child(player)
-	camera.global_position = player.global_position
 	add_child(camera)
 	spawn_creeps()
+	$GameTimer.timeout.connect(_on_game_timer_timeout)
 	
-	
-	
+# ===============================================
+# =================== PROCESS ===================
+# ===============================================
+
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("center_the_camera"):
-		camera.global_position = player.global_position
+	pass
+
+
+# ===============================================
+# ===============================================
+# ===============================================
+
+func buy_item(shop_item):
+	if camera.player.current_gold >= shop_item.price:
+		for slot in inventory.get_children():
+			if slot.get_child_count() == 0:
+				var item = shop_item.duplicate()
+				item.get_node('PanelContainer').visible = false
+				item.inshop = false
+				slot.add_child(item)
+				camera.player.current_gold -= shop_item.price
+				break
+	else:
+		camera.place_tip_on_ui('Недостаточно золота')
+
+func sell_item(item):
+	camera.player.get_extra_reward(item.price / 2)
+	item.queue_free()
+
+	
+#func show_slot():
+	#print(inventory.get_child(0).get_children())
+
+
 
 func start_player_death_countdown():
-	player.visible = false
-	player.position = $'PlayerSpawnPoint'.position
-	$PlayerDeathTimer.wait_time = 4 + 6 * player.current_level
+	camera.player.visible = false
+	camera.player.global_position = $PlayerSpawnPoint.global_position
+	camera.player.movement_target = camera.player.global_position
+	camera.player.enemy_target = null
+	
+	$PlayerDeathTimer.wait_time = 4 + 6 * camera.player.current_level
 	$PlayerDeathTimer.start()
 	camera.get_node('Player_UI/DeathTimerControl').visible = true
 	
 func _on_player_death_timer_timeout() -> void:
-	player.isdead = false
-	player.hp = player.max_hp
-	player.movement_target = player.global_position
-	player.enemy_target = null
-	player.set_state(player.states.idle)
+	camera.player.isdead = false
+	camera.player.hp = camera.player.max_hp
+	camera.player.set_state(camera.player.states.idle)
+	camera.player.visible = true
 	
-	player.visible = true
 	camera.get_node('Player_UI/DeathTimerControl').visible = false
-	camera.global_position = player.global_position
+	camera.global_position = camera.player.global_position
+
+
+func _on_game_timer_timeout() -> void:
+	time += 1
+	var minutes = floor(time / 60)
+	var seconds = floor(time % 60)
+	camera.get_node('Player_UI/TimerContainer/Timer').text = str("%02d:%02d" % [minutes, seconds])
+	camera.player.current_gold += 1
 
 func end_game(is_victory :bool = true ):
 	get_tree().paused = true

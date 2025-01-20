@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://soim6wsw5qxy"]
+
+[ext_resource type="PackedScene" uid="uid://drje3pwgnmqi0" path="res://scenes/items/item_entity.tscn" id="1_6vlfn"]
+[ext_resource type="Texture2D" uid="uid://cjk0sj476rhm6" path="res://asset/icons/BTNImprovedUnholyStrength.webp" id="2_g6chn"]
+
+[node name="DemonGloves" instance=ExtResource("1_6vlfn")]
+texture_normal = ExtResource("2_g6chn")
+item_name = "Демонические латы"
+price = 2500
+strenght = 30

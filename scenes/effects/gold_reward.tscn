@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://djp275p5le8y8"]
+
+[ext_resource type="Script" path="res://script/effects/gold_reward.gd" id="1_8ggpn"]
+
+[sub_resource type="Animation" id="Animation_nduni"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -100)]
+}
+
+[sub_resource type="Animation" id="Animation_ps3w1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_accrq"]
+_data = {
+"RESET": SubResource("Animation_ps3w1"),
+"default": SubResource("Animation_nduni")
+}
+
+[node name="Label" type="Label"]
+offset_right = 24.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.968627, 0.878431, 0.0392157, 1)
+theme_override_font_sizes/font_size = 13
+text = "+15
+"
+script = ExtResource("1_8ggpn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_accrq")
+}
+autoplay = "default"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
